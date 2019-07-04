@@ -1,5 +1,5 @@
 {
-  "name": "diem",
+  "name": "@humancollective/diem",
   "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/diem.esm.js",
