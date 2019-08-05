@@ -1,7 +1,10 @@
-import { format } from 'date-fns';
-import { Timestamp } from '@firebase/firestore-types';
+import { format as formatDate } from 'date-fns';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
-export type Timestamp = Timestamp;
+export type Timestamp = firebase.firestore.Timestamp;
+
+const Timestamp = firebase.firestore.Timestamp;
 
 // https://date-fns.org/docs/Getting-Started
 
@@ -45,10 +48,44 @@ export const createTimestamp = (): Timestamp => Timestamp.now();
  * @returns A string representing the formatted Timestamp
  *
  */
-export const formatTimestamp = ({
+export const format = ({
   timestamp,
-  formatString,
+  format,
 }: {
   timestamp: Timestamp;
-  formatString: string;
-}): string => format(timestampToDate(timestamp), formatString);
+  format: string;
+}): string => formatDate(timestampToDate(timestamp), format);
+
+/**
+ * Sorts an array of timestamps in ascending/descending order
+ *
+ *
+ * @param timestamps - The array of dates/timestamps
+ * @param ascending - Optional. Defaults to true.
+ * @returns A string representing the formatted Timestamp
+ *
+ */
+export const sort = ({
+  timestamps,
+  ascending = true,
+}: {
+  timestamps: Timestamp[];
+  ascending?: boolean;
+}): Timestamp[] => {
+  const sortedTimestamps = timestamps.sort(
+    (firstTimestamp, secondTimestamp) => {
+      const firstDate = timestampToDate(firstTimestamp);
+      const secondDate = timestampToDate(secondTimestamp);
+
+      if (firstDate < secondDate) return -1;
+      if (firstDate > secondDate) return 1;
+      return 0;
+    }
+  );
+
+  if (!ascending) {
+    return sortedTimestamps.reverse();
+  }
+
+  return sortedTimestamps;
+};
