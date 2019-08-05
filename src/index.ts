@@ -1,4 +1,4 @@
-import { format as formatDate } from 'date-fns';
+import { format as formatDate, compareAsc } from 'date-fns';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -88,4 +88,31 @@ export const sort = ({
   }
 
   return sortedTimestamps;
+};
+
+/**
+ * Compares the first timestamp/date to the second given timestamp/date
+ *
+ *
+ * @param first - The timestamp/date to compare
+ * @param second - The timestamp/date to compare too
+ * @returns 1 if the first date is after the second, -1 if the first date is before the second or 0 if dates are equal.
+ *
+ */
+export const compare = ({
+  first,
+  second,
+}: {
+  first: Date | Timestamp;
+  second: Date | Timestamp;
+}): Number => {
+  if (first instanceof Timestamp && second instanceof Timestamp) {
+    const firstDate = timestampToDate(first);
+    const secondDate = timestampToDate(second);
+    return compareAsc(firstDate, secondDate);
+  } else if (first instanceof Date && second instanceof Date) {
+    return compareAsc(first, second);
+  } else {
+    throw new Error('Must be given two timestamps or two dates');
+  }
 };
