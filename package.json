@@ -14,18 +14,13 @@
     "deploy": "yarn build && yarn publish --access=public"
   },
   "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "devDependencies": {
     "@types/date-fns": "^2.6.0",
     "@types/jest": "^24.0.15",
     "husky": "^3.0.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
-    "tsdx": "^0.7.2",
+    "tsdx": "^0.13.2",
     "tslib": "^1.10.0",
     "typescript": "^3.5.2"
   },
