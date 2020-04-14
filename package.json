@@ -1,16 +1,17 @@
 {
-  "name": "@rdrnt/diem",
-  "version": "1.0.1",
+  "name": "fastis",
+  "version": "1.0.2",
   "main": "dist/index.js",
-  "module": "dist/diem.esm.js",
-  "typings": "dist/index.d.ts",
+  "module": "dist/fastis.esm.js",
+  "typings": "dist/fastis.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test"
+    "test": "tsdx test",
+    "deploy": "yarn build && yarn publish --access=public"
   },
   "peerDependencies": {},
   "husky": {
