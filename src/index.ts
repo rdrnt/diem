@@ -1,12 +1,10 @@
 import { format as formatDate, compareAsc } from 'date-fns';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
 
-export type Timestamp = firebase.firestore.Timestamp;
-
-const Timestamp = firebase.firestore.Timestamp;
+import { Timestamp } from '@firebase/firestore-types';
 
 // https://date-fns.org/docs/Getting-Started
+
+export { Timestamp };
 
 /**
  * Converts a Firestore Timestamp to Date
@@ -105,14 +103,26 @@ export const compare = ({
 }: {
   first: Date | Timestamp;
   second: Date | Timestamp;
-}): Number => {
-  if (first instanceof Timestamp && second instanceof Timestamp) {
+}): number => {
+  if (isTimestamp(first) && isTimestamp(second)) {
     const firstDate = timestampToDate(first);
     const secondDate = timestampToDate(second);
     return compareAsc(firstDate, secondDate);
-  } else if (first instanceof Date && second instanceof Date) {
+  } else if (!isTimestamp(first) && !isTimestamp(second)) {
     return compareAsc(first, second);
   } else {
     throw new Error('Must be given two timestamps or two dates');
   }
+};
+
+/**
+ * A type guard for checking if a variable is a Timestamp
+ *
+ *
+ * @param first - The timestamp/date to check
+ * @returns A type predicate
+ *
+ */
+export const isTimestamp = (date: Date | Timestamp): date is Timestamp => {
+  return (date as Timestamp).nanoseconds !== undefined;
 };

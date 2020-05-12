@@ -1,33 +1,39 @@
 {
   "name": "fastis",
-  "version": "1.0.6-alpha",
-  "main": "dist/index.js",
+  "author": "Riley Drnt",
   "module": "dist/fastis.esm.js",
+  "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "umd:main": "dist/fastis.umd.production.js",
+  "version": "1.6.0-alpha",
+  "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "deploy": "yarn build && yarn publish --access=public"
-  },
-  "devDependencies": {
-    "@types/date-fns": "^2.6.0",
-    "@types/jest": "^24.0.15",
-    "firebase": "^7.14.3",
-    "husky": "^3.0.0",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "tsdx": "^0.13.2",
-    "tslib": "^1.10.0",
-    "typescript": "^3.8.3"
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
   },
   "dependencies": {
     "@firebase/app-types": "^0.4.7",
     "@firebase/firestore-types": "^1.7.0",
     "date-fns": "^2.0.1"
-  }
+  },
+  "devDependencies": {
+    "@types/date-fns": "^2.6.0",
+    "@types/jest": "^24.0.15",
+    "firebase": "^7.14.3",
+    "husky": "^4.2.5",
+    "prettier": "^1.18.2",
+    "tsdx": "^0.13.2",
+    "tslib": "^1.11.2",
+    "typescript": "^3.8.3"
+  },
+  "peerDependencies": {}
 }
