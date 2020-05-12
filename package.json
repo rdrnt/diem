@@ -4,7 +4,7 @@
   "module": "dist/fastis.esm.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "version": "1.6.0-alpha",
+  "version": "1.6.0-alpha2",
   "license": "MIT",
   "files": [
     "dist",
