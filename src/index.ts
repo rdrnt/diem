@@ -3,11 +3,27 @@ import { format as formatDate, compareAsc } from 'date-fns';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-import { Timestamp } from '@firebase/firestore-types';
+import { Timestamp as TimestampType } from '@firebase/firestore-types';
 
-export { Timestamp };
+export type Timestamp = TimestampType;
 
-// https://date-fns.org/docs/Getting-Started
+// Handle the firebase instance/initializing
+
+let FirebaseInstance: typeof firebase | undefined = undefined;
+
+export const initialize = (instance: typeof firebase) => {
+  FirebaseInstance = instance;
+};
+
+const useFirebaseInstance = (): typeof firebase => {
+  if (FirebaseInstance) {
+    return FirebaseInstance;
+  } else {
+    throw new Error(
+      'You must initialize Fastis with your firebase instance in order to use Timestamps'
+    );
+  }
+};
 
 /**
  * Converts a Firestore Timestamp to Date
@@ -28,7 +44,8 @@ export const timestampToDate = (timestamp: Timestamp): Date =>
  * @returns A Firestore Timestamp from the provided Date
  *
  */
-export const dateToTimestamp = firebase.firestore.Timestamp.fromDate;
+export const dateToTimestamp = (date: Date) =>
+  useFirebaseInstance().firestore.Timestamp.fromDate(date);
 
 /**
  * Creates a Firebase Timestamp of the current date
@@ -37,10 +54,12 @@ export const dateToTimestamp = firebase.firestore.Timestamp.fromDate;
  * @returns A Timestamp of the current date/time
  *
  */
-export const createTimestamp = firebase.firestore.Timestamp.now;
+export const createTimestamp = (): Timestamp =>
+  useFirebaseInstance().firestore.Timestamp.now();
 
 /**
  * Formats a Timestamp for displaying certain values
+ * // https://date-fns.org/docs/Getting-Started
  *
  *
  * @param timestamp - The Timestamp to format

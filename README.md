@@ -1,27 +1,23 @@
-# TSDX Bootstrap
+# Fastis
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+A library for working with Dates & Timestamps. Powered by [date-fns](https://date-fns.org/). Created for Human Collective, but now maintained by [@rdrnt](https://github.com/rdrnt).
 
-## Local Development
+## How To Use
 
-Below is a list of commands you will probably find useful.
+1. `yarn add fastis` in your project
 
-### `npm start` or `yarn start`
+2. If you plan on using Timestamps, you will need to initialize Fastis with your firebase instance in your project:
 
-Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for you convenience. Error messages are pretty printed and formatted for compatibility VS Code's Problems tab.
+```js
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { initialize } from 'fastis';
 
-<img src="https://user-images.githubusercontent.com/4060187/52168303-574d3a00-26f6-11e9-9f3b-71dbec9ebfcb.gif" width="600" />
+firebase.initializeApp();
 
-Your library will be rebuilt if you make edits.
+initialize(firebase);
+```
 
-### `npm run build` or `yarn build`
+This is required because Timestamps are server dependant on your project.
 
-Bundles the package to the `dist` folder.
-The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
-
-<img src="https://user-images.githubusercontent.com/4060187/52168322-a98e5b00-26f6-11e9-8cf6-222d716b75ef.gif" width="600" />
-
-### `npm test` or `yarn test`
-
-Runs the test watcher (Jest) in an interactive mode.
-By default, runs tests related to files changed since the last commit.
+3. You're set! `import { format } from 'fastis';`
