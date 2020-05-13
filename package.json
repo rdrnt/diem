@@ -1,8 +1,8 @@
 {
   "name": "fastis",
   "author": "Riley Drnt",
-  "module": "dist/fastis.esm.js",
   "main": "dist/index.js",
+  "module": "dist/fastis.esm.js",
   "typings": "dist/index.d.ts",
   "version": "1.6.0-alpha2",
   "license": "MIT",
@@ -35,5 +35,7 @@
     "tslib": "^1.11.2",
     "typescript": "^3.8.3"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "firebase": "^7.0.0"
+  }
 }

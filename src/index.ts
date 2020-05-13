@@ -1,10 +1,13 @@
 import { format as formatDate, compareAsc } from 'date-fns';
 
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
 import { Timestamp } from '@firebase/firestore-types';
 
-// https://date-fns.org/docs/Getting-Started
-
 export { Timestamp };
+
+// https://date-fns.org/docs/Getting-Started
 
 /**
  * Converts a Firestore Timestamp to Date
@@ -25,8 +28,7 @@ export const timestampToDate = (timestamp: Timestamp): Date =>
  * @returns A Firestore Timestamp from the provided Date
  *
  */
-export const dateToTimestamp = (date: Date): Timestamp =>
-  Timestamp.fromDate(date);
+export const dateToTimestamp = firebase.firestore.Timestamp.fromDate;
 
 /**
  * Creates a Firebase Timestamp of the current date
@@ -35,7 +37,7 @@ export const dateToTimestamp = (date: Date): Timestamp =>
  * @returns A Timestamp of the current date/time
  *
  */
-export const createTimestamp = (): Timestamp => Timestamp.now();
+export const createTimestamp = firebase.firestore.Timestamp.now;
 
 /**
  * Formats a Timestamp for displaying certain values
